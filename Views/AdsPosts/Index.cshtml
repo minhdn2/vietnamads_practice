@@ -18,24 +18,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Price_IsDealable)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.LogoUrl)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.AdsForm)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AdsVendor)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
@@ -55,26 +55,28 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @{var price = (item.Price == null && item.Price_IsDealable) ? "Dealable" : item.Price.ToString();}
+                @price
+                @*@Html.DisplayFor(modelItem => item.Price)*@
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Price_IsDealable)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.LogoUrl)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.AdsForm.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdsForm.Id)
+                @Html.DisplayFor(modelItem => item.AdsVendor.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdsVendor.Id)
-            </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>

@@ -43,7 +43,8 @@
         </div>
         <br />
         <p>
-            @Model.Description
+            @{ var description = @Model.Description.Replace(Environment.NewLine, "<br/>");}
+            @Html.Raw(description)
         </p>
         <div>
             <img src="@Model.LogoUrl" class="img-thumbnail" />
