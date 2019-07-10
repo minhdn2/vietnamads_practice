@@ -26,31 +26,33 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="text-truncate text-secondary">
-                                    @item.Description
+                                    <small>@item.Description</small>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
-                                        <small class="card-text">@price @item.Price_UnitOfMeasure</small>
+                                <div class="text-secondary">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
+                                            <small class="card-text">Giá: @price @item.Price_UnitOfMeasure</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small class="card-text">@item.CreatedDate.ToString("dd/MMM/yyyy")</small>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <small class="card-text">@item.CreatedDate.ToString("dd/MMM/yyyy")</small>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            [Soc Son, Ha Noi]
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small class="card-text">@item.AdsForm.Name</small>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        [Soc Son, Ha Noi]
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class="card-text">@item.AdsForm.Name</small>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <small class="card-text">@item.Nature</small>
-                                    </div>
-                                    <div class="col-md-6">
-                                        [Tre^n 50m2]
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <small class="card-text">@item.Nature</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            [Tre^n 50m2]
+                                        </div>
                                     </div>
                                 </div>
                             </div>
