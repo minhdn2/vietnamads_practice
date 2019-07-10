@@ -1,0 +1,52 @@
+﻿@model VietnamAds_Practice.Models.AdsPost
+@{
+    ViewData["Title"] = @Model.Title;
+}
+
+<div class="card">
+    <div class="card-header">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="@Model.LogoUrl" class="img-thumbnail" />
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        @{var price = (Model.Price == null && Model.Price_IsDealable) ? "Price Dealable" : Model.Price.ToString();}
+                        <span class="text-primary">@(price)</span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-primary">@Model.CreatedDate.ToString("dd/MMM/yyyy")</span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        [Soc Son, Ha Noi]
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-primary">@Model.AdsForm.Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        [Ti~nh]
+                    </div>
+                    <div class="col-md-6">
+                        [Tre^n 50m2]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <p>
+            @Model.Description
+        </p>
+        <div>
+            <img src="@Model.LogoUrl" class="img-thumbnail" />
+        </div>
+    </div>
+</div>
