@@ -4,58 +4,60 @@
 }
 
 <style type="text/css">
-    a:hover{
+    a:hover {
         text-decoration: none;
     }
-
-
 </style>
+<div class="container">
+    <div class="col-lg-8 col-md-12">
 
-@foreach (var item in Model)
-{
-    <a asp-action="ViewDetails" asp-route-id="@item.Id">
-        <div class="card">
-            <div class="card-header">
-                @item.Title
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="@item.LogoUrl" class="img-thumbnail" />
-                    </div>
-                    <div class="col-md-9">
-                        <div class="text-truncate text-secondary">
-                            @item.Description
-                        </div>
-                        <hr />
+        @foreach (var item in Model)
+        {
+            <a asp-action="ViewDetails" asp-route-id="@item.Id">
+                <div class="card mb-2">
+                    @*<div class="card-header">
+                        @item.Title
+                    </div>*@
+                    <div class="card-body">
+                        <h6 class="card-title">@item.Title</h6>
                         <div class="row">
-                            <div class="col-md-6">
-                                @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
-                                <span >@price @item.Price_UnitOfMeasure</span>
+                            <div class="col-md-3">
+                                <img src="@item.LogoUrl" class="img-thumbnail" />
                             </div>
-                            <div class="col-md-6">
-                                <span >@item.CreatedDate.ToString("dd/MMM/yyyy")</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                [Soc Son, Ha Noi]
-                            </div>
-                            <div class="col-md-6">
-                                <span >@item.AdsForm.Name</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                @item.Nature
-                            </div>
-                            <div class="col-md-6">
-                                [Tre^n 50m2]
+                            <div class="col-md-9">
+                                <div class="text-truncate text-secondary">
+                                    @item.Description
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
+                                        <small class="card-text">@price @item.Price_UnitOfMeasure</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="card-text">@item.CreatedDate.ToString("dd/MMM/yyyy")</small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        [Soc Son, Ha Noi]
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="card-text">@item.AdsForm.Name</small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small class="card-text">@item.Nature</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        [Tre^n 50m2]
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </a>
-}
+            </a>
+        }
+    </div>
+</div>
