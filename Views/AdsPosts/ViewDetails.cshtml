@@ -16,12 +16,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         @{var price = (Model.Price == null && Model.Price_IsDealable) ? "Price Dealable" : Model.Price.ToString();}
-                        <span class="text-primary">@(price)</span>
+                        <span class="text-primary">@price @Model.Price_UnitOfMeasure</span>
                     </div>
                     <div class="col-md-6">
                         <span class="text-primary">@Model.CreatedDate.ToString("dd/MMM/yyyy")</span>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -33,7 +32,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        [Ti~nh]
+                        <span class="text-primary">@Model.Nature</span>
                     </div>
                     <div class="col-md-6">
                         [Tre^n 50m2]

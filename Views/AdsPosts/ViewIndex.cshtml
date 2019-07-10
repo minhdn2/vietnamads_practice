@@ -7,6 +7,8 @@
     a:hover{
         text-decoration: none;
     }
+
+
 </style>
 
 @foreach (var item in Model)
@@ -29,10 +31,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
-                                <span class="text-primary">@(price)</span>
+                                <span >@price @item.Price_UnitOfMeasure</span>
                             </div>
                             <div class="col-md-6">
-                                <span class="text-primary">@item.CreatedDate.ToString("dd/MMM/yyyy")</span>
+                                <span >@item.CreatedDate.ToString("dd/MMM/yyyy")</span>
                             </div>
                         </div>
                         <div class="row">
@@ -40,12 +42,12 @@
                                 [Soc Son, Ha Noi]
                             </div>
                             <div class="col-md-6">
-                                <span class="text-primary">@item.AdsForm.Name</span>
+                                <span >@item.AdsForm.Name</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                [Ti~nh]
+                                @item.Nature
                             </div>
                             <div class="col-md-6">
                                 [Tre^n 50m2]

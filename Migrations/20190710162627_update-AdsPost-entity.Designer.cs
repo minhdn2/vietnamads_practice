@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VietnamAds_Practice.Data;
 
 namespace VietnamAds_Practice.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190710162627_update-AdsPost-entity")]
+    partial class updateAdsPostentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,7 +233,7 @@ namespace VietnamAds_Practice.Migrations
 
                     b.Property<string>("Nature");
 
-                    b.Property<decimal?>("Price");
+                    b.Property<float?>("Price");
 
                     b.Property<bool>("Price_IsDealable");
 

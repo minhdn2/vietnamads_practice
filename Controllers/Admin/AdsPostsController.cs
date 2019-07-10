@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VietnamAds_Practice.Data;
 using VietnamAds_Practice.Models;
+using VietnamAds_Practice.Models.Base;
 
 namespace VietnamAds_Practice.Controllers.Admin
 {
@@ -80,6 +81,8 @@ namespace VietnamAds_Practice.Controllers.Admin
             ViewData["AdsTypeId"] = new SelectList(adsTypes, "Id", "Name");
             //ViewData["AdsFormId"] = new SelectList(_context.AdsForm, "Id", "Name");
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name");
+            ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure);
+            ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature);
             return View();
         }
 
@@ -99,7 +102,7 @@ namespace VietnamAds_Practice.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Price,Price_IsDealable,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,UpdatedDate,DeletedDate")] AdsPost adsPost)
+        public async Task<IActionResult> Create([Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,UpdatedDate,DeletedDate")] AdsPost adsPost)
         {
             if (ModelState.IsValid)
             {
@@ -112,6 +115,8 @@ namespace VietnamAds_Practice.Controllers.Admin
             }
             ViewData["AdsFormId"] = new SelectList(_context.AdsForm, "Id", "Name", adsPost.AdsFormId);
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name", adsPost.AdsVendorId);
+            ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure, adsPost.Price_UnitOfMeasure);
+            ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature, adsPost.Nature);
             return View(adsPost);
         }
 
@@ -130,6 +135,8 @@ namespace VietnamAds_Practice.Controllers.Admin
             }
             ViewData["AdsFormId"] = new SelectList(_context.AdsForm, "Id", "Name", adsPost.AdsFormId);
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name", adsPost.AdsVendorId);
+            ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure, adsPost.Price_UnitOfMeasure);
+            ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature, adsPost.Nature);
             return View(adsPost);
         }
 
@@ -138,7 +145,7 @@ namespace VietnamAds_Practice.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Price,Price_IsDealable,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,CreatedDate,DeletedDate")] AdsPost adsPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,CreatedDate,DeletedDate")] AdsPost adsPost)
         {
             if (id != adsPost.Id)
             {
@@ -150,6 +157,12 @@ namespace VietnamAds_Practice.Controllers.Admin
                 try
                 {
                     adsPost.UpdatedDate = DateTime.Now;
+
+                    if (adsPost.Price_IsDealable)
+                    {
+                        adsPost.Price = null;
+                        adsPost.Price_UnitOfMeasure = string.Empty;
+                    }
 
                     _context.Update(adsPost);
                     await _context.SaveChangesAsync();
@@ -169,6 +182,8 @@ namespace VietnamAds_Practice.Controllers.Admin
             }
             ViewData["AdsFormId"] = new SelectList(_context.AdsForm, "Id", "Name", adsPost.AdsFormId);
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name", adsPost.AdsVendorId);
+            ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure, adsPost.Price_UnitOfMeasure);
+            ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature, adsPost.Nature);
             return View(adsPost);
         }
 
