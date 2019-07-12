@@ -3,6 +3,8 @@
     ViewData["Title"] = @Model.Title;
 }
 
+@using System.Globalization;
+
 <div class="card">
     <div class="card-header">
         @Html.DisplayFor(model => model.Title)
@@ -10,13 +12,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <img src="@Model.LogoUrl" class="img-thumbnail" />
+                <img src="@Model.LogoUrl" class="rounded img-fluid" />
             </div>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
-                        @{var price = (Model.Price == null && Model.Price_IsDealable) ? "Price Dealable" : Model.Price.ToString();}
-                        <span class="text-primary">@price @Model.Price_UnitOfMeasure</span>
+                        @{var price = (Model.Price == null && Model.Price_IsDealable) ? "Dealable" : Model.Price?.ToString("n", new NumberFormatInfo { NumberGroupSeparator = "." });}
+                        <span class="text-primary">Giá: @price @Model.Price_UnitOfMeasure</span>
                     </div>
                     <div class="col-md-6">
                         <span class="text-primary">@Model.CreatedDate.ToString("dd/MMM/yyyy")</span>
@@ -35,12 +37,30 @@
                         <span class="text-primary">@Model.Nature</span>
                     </div>
                     <div class="col-md-6">
-                        [Tre^n 50m2]
+                        @{ var size = Math.Round(Model.Size_Length * Model.Size_Width, 0, MidpointRounding.AwayFromZero);
+                            var size_unitOfMeasure = "";
+                            switch (Model.Size_UnitOfMeasure)
+                            {
+                                case "Milimeters":
+                                    size_unitOfMeasure = "mm2";
+                                    break;
+                                case "Centimeters":
+                                    size_unitOfMeasure = "cm2";
+                                    break;
+                                case "Meters":
+                                    size_unitOfMeasure = "m2";
+                                    break;
+                            }
+                            if (size > 0)
+                            {
+                                <span class="text-primary">Trên @size @size_unitOfMeasure</span>
+                            }
+                        }
                     </div>
                 </div>
             </div>
         </div>
-        <br />
+        <hr />
         <p>
             @{ var description = @Model.Description.Replace(Environment.NewLine, "<br/>");}
             @Html.Raw(description)

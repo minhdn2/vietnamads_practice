@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -102,7 +103,7 @@ namespace VietnamAds_Practice.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,UpdatedDate,DeletedDate")] AdsPost adsPost)
+        public async Task<IActionResult> Create([Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,Size_Length,Size_Width,Size_Height,Size_UnitOfMeasure,UpdatedDate,DeletedDate")] AdsPost adsPost)
         {
             if (ModelState.IsValid)
             {
@@ -137,6 +138,7 @@ namespace VietnamAds_Practice.Controllers.Admin
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name", adsPost.AdsVendorId);
             ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure, adsPost.Price_UnitOfMeasure);
             ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature, adsPost.Nature);
+            ViewData["Size_UnitOfMeasure"] = new SelectList(ConstantData.Size_UnitOfMeasure, adsPost.Size_UnitOfMeasure);
             return View(adsPost);
         }
 
@@ -145,7 +147,7 @@ namespace VietnamAds_Practice.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,CreatedDate,DeletedDate")] AdsPost adsPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,Price,Price_UnitOfMeasure,Price_IsDealable,Nature,LogoUrl,AdsFormId,AdsVendorId,Id,Name,Description,Size_Length,Size_Width,Size_Height,Size_UnitOfMeasure,CreatedDate,DeletedDate")] AdsPost adsPost)
         {
             if (id != adsPost.Id)
             {
@@ -184,6 +186,7 @@ namespace VietnamAds_Practice.Controllers.Admin
             ViewData["AdsVendorId"] = new SelectList(_context.AdsVendor, "Id", "Name", adsPost.AdsVendorId);
             ViewData["Price_UnitOfMeasure"] = new SelectList(ConstantData.Price_UnitOfMeasure, adsPost.Price_UnitOfMeasure);
             ViewData["Ads_Nature"] = new SelectList(ConstantData.Ads_Nature, adsPost.Nature);
+            ViewData["Size_UnitOfMeasure"] = new SelectList(ConstantData.Size_UnitOfMeasure, adsPost.Size_UnitOfMeasure);
             return View(adsPost);
         }
 

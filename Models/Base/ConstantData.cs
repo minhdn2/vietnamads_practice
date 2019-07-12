@@ -15,7 +15,7 @@ namespace VietnamAds_Practice.Models.Base
         {
             Price_UnitOfMeasure = new List<string> { "VND", "USD" };
             Ads_Nature = new List<string> { "Tĩnh", "Động" };
-            Size_UnitOfMeasure = new List<string> { "Milimeters", "Centimeters", "Meters" };
+            Size_UnitOfMeasure = new List<string> { "Meters", "Centimeters", "Milimeters" };
         }
     }
 }

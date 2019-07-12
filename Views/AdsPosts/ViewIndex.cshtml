@@ -3,6 +3,9 @@
     ViewData["Title"] = "ViewIndex";
 }
 
+@using VietnamAds_Practice.Models.Base;
+@using System.Globalization;
+
 <style type="text/css">
     a:hover {
         text-decoration: none;
@@ -16,22 +19,24 @@
             <a asp-action="ViewDetails" asp-route-id="@item.Id">
                 <div class="card mb-2">
                     @*<div class="card-header">
-                        @item.Title
-                    </div>*@
+                            @item.Title
+                        </div>*@
                     <div class="card-body">
                         <h6 class="card-title">@item.Title</h6>
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="@item.LogoUrl" class="img-thumbnail" />
+                                <img src="@item.LogoUrl" class="rounded img-fluid" />
                             </div>
                             <div class="col-md-9">
                                 <div class="text-truncate text-secondary">
-                                    <small>@item.Description</small>
+                                    @*<small>@item.Description</small>*@
+                                    @{ var description = item.Description.Replace(Environment.NewLine, " - ");}
+                                    <small>@Html.Raw(description)</small>
                                 </div>
                                 <div class="text-secondary">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price.ToString();}
+                                            @{var price = (item.Price == null && item.Price_IsDealable) ? "Price Dealable" : item.Price?.ToString("n", new NumberFormatInfo { NumberGroupSeparator = "." });}
                                             <small class="card-text">Giá: @price @item.Price_UnitOfMeasure</small>
                                         </div>
                                         <div class="col-md-6">
@@ -51,7 +56,25 @@
                                             <small class="card-text">@item.Nature</small>
                                         </div>
                                         <div class="col-md-6">
-                                            [Tre^n 50m2]
+                                            @{ var size = Math.Round(item.Size_Length * item.Size_Width, 0, MidpointRounding.AwayFromZero);
+                                                var size_unitOfMeasure = "";
+                                                switch (item.Size_UnitOfMeasure)
+                                                {
+                                                    case "Milimeters":
+                                                        size_unitOfMeasure = "mm2";
+                                                        break;
+                                                    case "Centimeters":
+                                                        size_unitOfMeasure = "cm2";
+                                                        break;
+                                                    case "Meters":
+                                                        size_unitOfMeasure = "m2";
+                                                        break;
+                                                }
+                                                if (size > 0)
+                                                {
+                                                    <small class="card-text">Trên @size @size_unitOfMeasure</small>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                 </div>
